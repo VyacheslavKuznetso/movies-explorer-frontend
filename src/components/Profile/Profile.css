@@ -1,0 +1,145 @@
+.profile {
+  width: 89%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 74px 0 40px 0;
+}
+
+@media screen and (max-width: 769px) {
+  .profile {
+    padding-top: 236px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile {
+    padding-top: 70px;
+  }
+}
+
+.profile__title {
+  margin: 0;
+  color: #FFF;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+
+
+.profile__form {
+  padding-top: 123px;
+  width: 410px;
+  display: flex;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 769px) {
+  .profile__form {
+    padding-top: 96px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__form {
+    width: 80.50%;
+    padding-top: 80px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__form {
+    width: 91.50%;
+    padding-top: 80px;
+  }
+}
+
+.profile__field {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  padding-top: 17px;
+  border-bottom: 1px solid #424242;
+}
+
+
+.profile__field:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.profile__field:first-of-type {
+  padding-top: 0;
+}
+
+.profile__info {
+  width: 34.39%;
+  color: #FFF;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.profile__input {
+  width: 35%;
+  color: #FFF;
+  text-align: right;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+.register__error {
+  margin: 0;
+}
+
+.profile__edit {
+  width: 100px;
+  align-self: center;
+  margin-top: 220px;
+  color: #FFF;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 769px) {
+  .profile__edit {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__edit {
+    margin-top: 379px;
+  }
+}
+
+.profile__logout {
+  width: 110px;
+  align-self: center;
+  margin-top: 16px;
+  color: #EE3465;
+  text-align: center;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+}

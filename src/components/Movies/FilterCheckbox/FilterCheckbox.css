@@ -1,0 +1,49 @@
+.movies__checkbox {
+  appearance: none; /* Убираем стандартные стили браузера */
+  width: 36px;
+  height: 20px;
+  margin-right: 12px;
+  border-radius: 10px;
+  position: relative;
+  background-color: #EBEBEB; /* Цвет фона для неактивного состояния */
+  transition: background-color 0.3s ease; /* Анимация изменения цвета фона */
+  cursor: pointer;
+  font-family: Inter, Arial, sans-serif;
+}
+
+.movies__checkbox:checked {
+  background-color: #3DDC84;
+}
+
+.movies__checkbox::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: white;
+  left: 2px;
+  top: 2px;
+  transition: left 0.3s ease; /* Анимация изменения положения кружка */
+}
+
+.movies__checkbox:checked::before {
+  left: 18px;
+}
+
+.movies__label {
+  margin-top: 42px;
+  display: flex;
+  align-items: center;
+  color: #FFF;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+}
+
+@media screen and (max-width: 400px) {
+  .movies__label {
+    font-size: 11px;
+  }
+}

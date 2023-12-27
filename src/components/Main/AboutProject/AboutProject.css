@@ -1,0 +1,243 @@
+.about {
+  width: 89%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Inter,Arial,sans-serif;
+  padding-bottom: 90px;
+}
+
+
+.about__text {
+  width: 100%;
+  margin-top: 90px;
+  border-bottom: 1px solid #DADADA;
+}
+
+@media screen and (max-width: 426px) {
+  .about__text {
+    margin-top: 80px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__text {
+    margin-top: 70px;
+  }
+}
+
+.about__text-title {
+  width: 52%;
+  color: #FFF;
+  font-size: 22px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0 0 23px;
+}
+
+@media screen and (max-width: 426px) {
+  .about__text-title {
+    font-size: 20px;
+    margin: 0 0 25.5px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__text-title {
+    font-size: 18px;
+    margin: 0 0 28px;
+  }
+}
+
+.about__table {
+  display: flex;
+  justify-content: space-between;
+  padding: 70px 0 93px;
+}
+
+@media screen and (max-width: 565px) {
+  .about__table {
+    flex-direction: column;
+    padding: 60px 0 60px;
+    align-items: center;
+  }
+}
+
+
+.about__table-column {
+  width: 48.24%;
+}
+
+@media screen and (max-width: 565px) {
+  .about__table-column {
+    width: 85%;
+    align-self: center;
+    margin-bottom: 56px;
+  }
+
+  .about__table-column:last-of-type {
+    margin: 0;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__table-column {
+    width: 100%;
+  }
+}
+
+.about__table-title {
+  min-height: 24px;
+  color: #FFF;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.about__table-subtitle {
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 22px 0 0;
+}
+
+@media screen and (max-width: 769px) {
+  .about__table-subtitle {
+    font-size: 12px;
+    line-height: 18px;
+  }
+}
+
+.about__timeline {
+  width: 100%;
+  display: flex;
+}
+
+.about__backend {
+  width: 20%;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 426px) {
+  .about__backend {
+    width: 30%;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__backend {
+    width: 35.21%;
+  }
+}
+
+.about__backend-xs_background-color {
+  background-color: #3DDC84;
+  color: #000;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (max-width: 426px) {
+  .about__backend-xs_background-color {
+    font-size: 12.5px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__backend-xs_background-color {
+    font-size: 11px;
+  }
+}
+
+.about__frontend {
+  width: 80%;
+  min-height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
+}
+
+@media screen and (max-width: 426px) {
+  .about__frontend  {
+    width: 70%;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__frontend  {
+    width: 64.79%;
+  }
+}
+
+.about__frontend-xx_background-color {
+  background-color: #303030;
+  color: #FFF;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (max-width: 426px) {
+  .about__frontend-xx_background-color {
+    font-size: 12.5px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__frontend-xx_background-color {
+    font-size: 11px;
+  }
+}
+
+.about__backend-title {
+  color: #8B8B8B;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 426px) {
+  .about__backend-title {
+    font-size: 12.5px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__backend-title {
+    font-size: 11px;
+  }
+}
+
+.about__frontend-title {
+  color: #8B8B8B;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 17px;
+}
+
+@media screen and (max-width: 426px) {
+  .about__frontend-title {
+    font-size: 12.5px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .about__frontend-title {
+    font-size: 11px;
+  }
+}

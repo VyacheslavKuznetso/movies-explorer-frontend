@@ -1,0 +1,140 @@
+.navigation {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  font-family: Inter, Arial, sans-serif;
+}
+
+@media screen and (max-width: 769px) {
+  .navigation {
+    display: none;
+  }
+}
+
+.navigation__movies {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.conteiner__movies {
+  align-self: center;
+}
+
+
+.navigation__movies-burger {
+  display: none;
+}
+
+@media screen and (max-width: 769px) {
+  .navigation__movies-burger {
+    display: block;
+    position: relative;
+    width: 40px;
+    height: 43px;
+    cursor: pointer;
+    transition: all 0.3s ease 0s;
+  }
+
+  .navigation__movies-burger::before,
+  .navigation__movies-burger::after {
+    content: '';
+    background-color: #FFF;
+    position: absolute;
+    width: 22px;
+    height: 2.5px;
+    left: 9px;
+    transition: all 0.3s ease 0s;
+  }
+  .navigation__movies-burger::before {
+    top: 10px;
+  }
+
+  .navigation__movies-burger::after {
+    bottom: 10px;
+  }
+
+  .navigation__movies-burger span {
+    background-color: #FFF;
+    position: absolute;
+    width: 22px;
+    height: 2.5px;
+    left: 9px;
+    top: 20.5px;
+  }
+}
+
+.navigation__movies-burger_position-active::before {
+  transform: rotate(45deg);
+  top: 20px;
+}
+
+.navigation__movies-burger_position-active::after {
+  transform: rotate(-45deg);
+  bottom: 20px;
+}
+
+.navigation__movies-burger_position-active span {
+  transform: scale(0);
+}
+
+.navigation__movies-burger_position {
+  position: fixed;
+  top: 15.4px;
+  z-index: 3;
+}
+
+
+.navigation__movies-button {
+  height: 18px;
+  padding: 0;
+  border: none;
+  background-color: transparent;
+  text-align: center;
+  color: #FFF;
+  text-align: right;
+  font-family: Inter;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 18px;
+  cursor: pointer;
+  text-decoration: none;
+  margin-right: 16px;
+}
+
+.navigation__movies-button:last-child {
+  margin-right: 0;
+}
+
+@media screen and (max-width: 426px) {
+  .navigation__movies-button {
+    font-size: 18px;
+    line-height: normal;
+  }
+}
+
+
+.navigation-button__account {
+  width: 100px;
+  height: 32px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+  border-radius: 20px;
+  border: 0;
+  background-color: #313131;
+  color: #FFF;
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 16px;
+  cursor: pointer;
+}
+
+.active {
+  color: #3DDC84;
+}
