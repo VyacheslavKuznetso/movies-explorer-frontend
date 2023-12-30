@@ -4,7 +4,7 @@
   flex-direction: column;
   align-items: center;
   padding-top: 110px;
-  font-family: Inter,Arial,sans-serif;
+  font-family: Inter, Arial, sans-serif;
 }
 
 @media screen and (max-width: 768px) {
@@ -153,7 +153,6 @@
 
 .student__biography {
   color: #FFF;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
@@ -186,7 +185,6 @@
   display: inline-flex;
   min-width: 47px;
   color: #FFF;
-  font-family: Inter;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;

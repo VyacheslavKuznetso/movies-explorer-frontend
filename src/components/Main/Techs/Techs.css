@@ -6,7 +6,7 @@
   align-items: center;
   padding-top: 100px;
   padding-bottom: 100px;
-  font-family: Inter,Arial,sans-serif;
+  font-family: Inter, Arial, sans-serif;
 }
 
 @media screen and (max-width: 769px) {
@@ -210,17 +210,4 @@
     height: 57px;
     font-size: 12px;
   }
-}
-
-
-@media screen and (max-width: 664px) {
-
-}
-
-@media screen and (max-width: 426px) {
-
-}
-
-@media screen and (max-width: 321px) {
-
 }

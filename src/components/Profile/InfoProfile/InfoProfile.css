@@ -3,6 +3,7 @@
   width: 410px;
   display: flex;
   flex-direction: column;
+  font-family: Inter, Arial, sans-serif;
 }
 
 @media screen and (max-width: 769px) {
