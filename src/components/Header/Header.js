@@ -12,7 +12,7 @@ function Header(props) {
 
 
   return (
-    <div className="header">
+    <header className="header">
       <section className='header__user'>
         <NavLink to='/'>
           <img className="logo logo_place_header" src={HeaderLog} alt="Логотип" onClick={()=> props.handleLinkClick(0)} />
@@ -24,7 +24,7 @@ function Header(props) {
           }
         </div>
       </section>
-    </div>
+    </header>
   )
 }
 

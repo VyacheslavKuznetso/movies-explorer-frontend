@@ -30,6 +30,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: 16px;
+  align-self: center;
 }
 
 @media screen and (max-width: 426px) {
@@ -47,6 +48,8 @@
 .block-navigation__button {
   width: 96px;
   height: 36px;
+  display: flex;
+  justify-content: center;
   border-radius: 10px;
   background: #303030;
   border: none;

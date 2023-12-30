@@ -15,7 +15,6 @@ import Register from '../Register/Register';
 import Login from '../Login/Login';
 
 function App() {
-  const body = document.body;
 
   const [isPopupMenuOpen, setPopupMenuOpen] = useState(false);
 
@@ -24,17 +23,13 @@ function App() {
     name: 'Вячеслав',
     email: 'pochta@yandex.ru'
   });
-  const [loggedIn, setLoggedIn] = useState(false);
+
+  const [loggedIn, setLoggedIn] = useState(true);
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
 
 
   const toggleBurger = () => {
     setPopupMenuOpen(!isPopupMenuOpen);
-    if (isPopupMenuOpen) {
-      body.classList.remove('overflow');
-    } else {
-      body.classList.add('overflow');
-    }
   }
 
   const getInitialActiveLink = () => {

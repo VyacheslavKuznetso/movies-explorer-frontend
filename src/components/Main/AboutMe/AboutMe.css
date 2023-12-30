@@ -3,26 +3,34 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding-top: 110px;
   font-family: Inter,Arial,sans-serif;
+}
+
+@media screen and (max-width: 768px) {
+  .student {
+    padding-top: 90px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .student {
+    width: 91.25%;
+  }
+}
+
+
+@media screen and (max-width: 321px) {
+  .student {
+    padding-top: 70px;
+  }
 }
 
 .student__text {
   width: 100%;
   border-bottom: 1px solid #DADADA;
-  margin-top: 90px;
 }
 
-@media screen and (max-width: 426px) {
-  .student__text {
-    margin-top: 80px;
-  }
-}
-
-@media screen and (max-width: 321px) {
-  .student__text {
-    margin-top: 70px;
-  }
-}
 
 .student__text-title {
   width: 52%;
@@ -32,6 +40,7 @@
   font-weight: 400;
   line-height: normal;
   margin: 0 0 23px;
+  letter-spacing: -0.88px;
 }
 
 
@@ -82,6 +91,7 @@
   font-weight: 400;
   line-height: 58px;
   margin: 66px 0 0;
+  letter-spacing: -2px;
 }
 
 @media screen and (max-width: 769px) {
@@ -100,6 +110,7 @@
 @media screen and (max-width: 426px) {
   .student__name {
     font-size: 40px;
+    margin-top: 40px;
   }
 }
 
@@ -123,6 +134,7 @@
   .student__job {
     font-size: 12px;
     line-height: 18px;
+    margin: 16px 0 0;
   }
 }
 
@@ -153,6 +165,7 @@
   .student__biography {
     font-size: 12px;
     line-height: 18px;
+    margin: 20px 0 0;
   }
 }
 
@@ -182,6 +195,12 @@
   margin: 99px 0 0;
 }
 
+@media screen and (max-width: 769px) {
+  .student__github {
+    margin: 87px 0 0;
+  }
+}
+
 @media screen and (max-width: 700px) {
   .student__github {
     margin: 40px 0 0;
@@ -205,7 +224,7 @@
 
 .student__photo-conteiner {
   width: 270px;
-  min-height: 327px;
+  height: 327px;
   box-sizing: border-box;
   margin: 66px 0 0 0;
   border-radius: 10px;
@@ -215,19 +234,27 @@
 @media screen and (max-width: 769px) {
   .student__photo-conteiner {
     width: 255px;
-    min-height: 307px;
+    height: 307px;
   }
 }
 
 @media screen and (max-width: 700px) {
   .student__photo-conteiner {
-    min-width: 292px;
+    width: 292px;
+    height: 352px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .student__photo-conteiner {
+    margin-top: 60px;
   }
 }
 
 .student__photo-me {
   display: block;
   width: 100%;
-  object-fit: contain;
+  height: 100%;
+  object-fit: cover;
   object-position: left bottom;
 }

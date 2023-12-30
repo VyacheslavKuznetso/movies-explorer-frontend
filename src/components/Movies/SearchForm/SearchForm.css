@@ -1,10 +1,15 @@
 .movies-form {
   width: 100%;
   display: flex;
-  flex-wrap: nowrap;
+  flex-direction: column;
   align-items: center;
 }
 
+.conteiner-form {
+  width: 100%;
+  display: flex;
+  column-gap: 10px;
+}
 .movies-form__input {
   width: 95.26%;
   border: none;
@@ -17,7 +22,6 @@
   font-style: normal;
   font-weight: 400;
   line-height: 18px;
-  margin-right: 10px;
 }
 
 

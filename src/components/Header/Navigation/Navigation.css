@@ -13,13 +13,15 @@
 }
 
 .navigation__movies {
-  width: 100%;
+  width: 61.18%;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
 }
 
 .conteiner__movies {
+  display: flex;
   align-self: center;
+  column-gap: 16px;
 }
 
 
@@ -32,7 +34,7 @@
     display: block;
     position: relative;
     width: 40px;
-    height: 43px;
+    height: 44px;
     cursor: pointer;
     transition: all 0.3s ease 0s;
   }
@@ -42,9 +44,9 @@
     content: '';
     background-color: #FFF;
     position: absolute;
-    width: 22px;
+    width: 28px;
     height: 2.5px;
-    left: 9px;
+    left: 6px;
     transition: all 0.3s ease 0s;
   }
   .navigation__movies-burger::before {
@@ -58,16 +60,16 @@
   .navigation__movies-burger span {
     background-color: #FFF;
     position: absolute;
-    width: 22px;
+    width: 28px;
     height: 2.5px;
-    left: 9px;
+    left: 6px;
     top: 20.5px;
   }
 }
 
 .navigation__movies-burger_position-active::before {
   transform: rotate(45deg);
-  top: 20px;
+  top: 21px;
 }
 
 .navigation__movies-burger_position-active::after {
@@ -101,7 +103,6 @@
   line-height: 18px;
   cursor: pointer;
   text-decoration: none;
-  margin-right: 16px;
 }
 
 .navigation__movies-button:last-child {

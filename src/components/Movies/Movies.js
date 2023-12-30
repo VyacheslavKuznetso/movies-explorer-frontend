@@ -29,16 +29,14 @@ function Movies(props) {
 
 
   return (
-    <div className='movies'>
+    <main className='movies'>
       <div className='movies-conteiner'>
         <SearchForm  onGetMovie={onGetMovie} />
-        <FilterCheckbox />
-        <div className="line"></div>
       </div>
       <div className="movies-card__list">
       {loading ? <Preloader /> : <MoviesCardList data={data} />}
       </div>
-    </div>
+    </main>
   )
 }
 

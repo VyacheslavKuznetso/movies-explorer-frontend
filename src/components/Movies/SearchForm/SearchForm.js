@@ -1,6 +1,7 @@
 import './SearchForm.css';
 import React from "react";
 import MoviesButton from '../../../images/find-3.svg';
+import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
   const movieRef = React.useRef();
@@ -18,19 +19,24 @@ function SearchForm(props) {
   }
 
   return (
-    <form className="movies-form" onSubmit={handleSubmit} noValidate>
-      <input className="movies-form__input"
-      ref={movieRef}
-      type='text'
-      placeholder='Фильм'
-      name='movie'
-      minLength="6"
-      autoComplete='off'
-      />
-      <button className="movies-form__button" onClick={props.onGetMovie}>
-        <img src={MoviesButton} alt="Кнопка поиска" />
-      </button>
-    </form>
+    <>
+      <form className="movies-form" onSubmit={handleSubmit} noValidate>
+        <div className="conteiner-form">
+        <input className="movies-form__input"
+        ref={movieRef}
+        type='text'
+        placeholder='Фильм'
+        name='movie'
+        minLength="6"
+        autoComplete='off'
+            />
+        <button className="movies-form__button" type='submit' onClick={props.onGetMovie}>
+          <img src={MoviesButton} alt="Кнопка поиска" />
+        </button>
+      </div>
+      <FilterCheckbox />
+    </form >
+    </>
   )
 }
 

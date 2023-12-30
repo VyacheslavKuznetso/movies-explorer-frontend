@@ -19,14 +19,14 @@ function MoviesCardList(props) {
 
 
   return (
-    <div className='elements'>
+    <ul className='elements'>
       {renderMovies.map((movie) => (
         <MoviesCard
           key={movie.id || movie.movieId}
           movie={movie}
         />
       ))}
-    </div>
+    </ul>
   )
 
 }
