@@ -4,17 +4,27 @@ import MoviesButton from '../../../images/find-3.svg';
 import FilterCheckbox from '../FilterCheckbox/FilterCheckbox';
 
 function SearchForm(props) {
-  const movieRef = React.useRef();
+  // const movieRef = React.useRef();
   const [movieName, setMovieName] = React.useState('');
+  const [movieError, setMovieError] = React.useState('')
+  const [formNotValid, setformNotValid] = React.useState(true);
+
+  React.useEffect(() => {
+    if (movieError || !movieName) {
+      setformNotValid(true);
+    } else {
+      setformNotValid(false);
+    }
+  }, [movieError, movieName]);
+
+  function handleMovie(e) {
+    setMovieName(e.target.value);
+    setMovieError(e.target.validationMessage);
+  }
 
   function handleSubmit(e) {
     e.preventDefault();
 
-    const movie = movieRef.current.value;
-
-    props.onGetMovie({
-      movie: movie
-    });
 
   }
 
@@ -22,17 +32,18 @@ function SearchForm(props) {
     <>
       <form className="movies-form" onSubmit={handleSubmit} noValidate>
         <div className="conteiner-form">
-        <input className="movies-form__input"
-        ref={movieRef}
+        <input required
+        className="movies-form__input"
         type='text'
         placeholder='Фильм'
         name='movie'
         minLength="6"
         autoComplete='off'
-            />
-        <button className="movies-form__button" type='submit' onClick={props.onGetMovie}>
-          <img src={MoviesButton} alt="Кнопка поиска" />
+        onChange={handleMovie} />
+        <button className="movies-form__button effect" type='submit' onClick={props.onGetMovie} disabled={formNotValid} >
+          <img src={MoviesButton} alt="Кнопка поиска" className='effect'/>
         </button>
+        <p className='movies-form_error'>{movieError}</p>
       </div>
       <FilterCheckbox />
     </form >

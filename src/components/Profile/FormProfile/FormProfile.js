@@ -6,7 +6,7 @@ function FormProfile(props) {
 
   return (
     <>
-      <form className='profile__form' >
+      <form className='profile__form' noValidate>
         <div className='profile__field'>
           <label className='profile__info'>Имя</label>
           <input required

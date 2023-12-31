@@ -1,6 +1,7 @@
 .form {
   width: 31%;
   padding-top: 22px;
+  box-sizing: border-box;
 
 }
 

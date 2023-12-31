@@ -46,5 +46,6 @@
 @media screen and (max-width: 400px) {
   .movies__label {
     font-size: 11px;
+    margin-top: 47px;
   }
 }

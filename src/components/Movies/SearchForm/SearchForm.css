@@ -10,6 +10,7 @@
   width: 100%;
   display: flex;
   column-gap: 10px;
+  position: relative;
 }
 .movies-form__input {
   width: 95.26%;
@@ -30,4 +31,19 @@
   width: 44px;
   height: 44px;
   display: contents;
+  cursor: pointer;
+}
+
+.movies-form_error {
+  margin: 0;
+  align-self: flex-start;
+  position: absolute;
+  left: 0;
+  bottom: -22px;
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
 }

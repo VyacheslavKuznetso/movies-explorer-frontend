@@ -75,7 +75,7 @@ function Profile({ setLoggedIn }) {
 
   return (
     <main className='profile'>
-      <h1 className='profile__title'>Привет, {currentUser.name} !</h1>
+      <h1 className='profile__title'>Привет, {currentUser.name}!</h1>
       {submit
         ?
         <FormProfile

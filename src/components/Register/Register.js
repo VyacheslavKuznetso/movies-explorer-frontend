@@ -10,19 +10,11 @@ function Register(props) {
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [message, setMessage] = React.useState('');
   const [nameError, setNameError] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
   const [formNotValid, setformNotValid] = React.useState(true);
 
-  React.useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        setMessage('');
-      }, 4500);
-    }
-  }, [message])
 
   React.useEffect(() => {
     if (nameError || emailError || passwordError || !name || !email || !password) {
@@ -67,7 +59,7 @@ function Register(props) {
         </NavLink>
         <h1 className='register__title'>Добро пожаловать!</h1>
       </header>
-      <Form nameFor='register__form' nameId="registerForm" formId="registerForm" submitButtonLabel="Зарегистрироваться" formNotValid={formNotValid} message={message}>
+      <Form nameFor='register__form' nameId="registerForm" formId="registerForm" submitButtonLabel="Зарегистрироваться" formNotValid={formNotValid}>
         <label className="form__wrapper-register">
           <input required
           className={`form__input-register form__input-register_text_name ${nameError !== '' ? 'register_error' : ''}`}

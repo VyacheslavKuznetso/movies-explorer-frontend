@@ -9,18 +9,9 @@ function Login(props) {
 
   const [email, setEmail] = React.useState('');
   const [password, setPassword] = React.useState('');
-  const [message, setMessage] = React.useState('');
   const [emailError, setEmailError] = React.useState('');
   const [passwordError, setPasswordError] = React.useState('');
   const [formNotValid, setformNotValid] = React.useState(true);
-
-  React.useEffect(() => {
-    if (message) {
-      setTimeout(() => {
-        setMessage('');
-      }, 4500);
-    }
-  }, [message])
 
   React.useEffect(() => {
     if (emailError || passwordError || !email || !password) {
@@ -59,7 +50,7 @@ function Login(props) {
         </NavLink>
         <h1 className='login__title'>Рады видеть!!</h1>
       </header>
-      <Form nameFor='login__form' nameId="loginForm" formId="loginForm" submitButtonLabel="Войти" formNotValid={formNotValid} message={message}>
+      <Form nameFor='login__form' nameId="loginForm" formId="loginForm" submitButtonLabel="Войти" formNotValid={formNotValid} >
       <label className="form__wrapper-login">
           <input required
           className={`form__input-login form__input-login_text_email ${emailError !== '' ? 'login_error' : ''}`}

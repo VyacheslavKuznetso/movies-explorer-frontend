@@ -13,10 +13,10 @@ function Navigation(props) {
     <>
       <div className="navigation">
         <nav className='navigation__movies'>
-          <div className='conteiner__movies'>
+          <nav className='conteiner__movies'>
             <NavLink to='/movies' className={`navigation__movies-button ${activeLink === 1 ? 'active' : ''} effect`} onClick={()=> props.handleLinkClick(1)}>Фильмы</NavLink>
             <NavLink to='/saved-movies' className={`navigation__movies-button ${activeLink === 2 ? 'active' : ''} effect`} onClick={()=> props.handleLinkClick(2)}>Сохранённые фильмы</NavLink>
-          </div>
+          </nav>
           <NavLink to='/profile' className={`navigation-button__account ${activeLink === 3 ? 'active' : ''} effect`} onClick={()=> props.handleLinkClick(3)}>Аккаунт</NavLink>
         </nav>
       </div>

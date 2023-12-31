@@ -78,3 +78,9 @@
 .block-navigation__info_list:last-child {
   margin-right: 0px;
 }
+
+@media screen and (max-width: 426px) {
+  .block-navigation__info_list {
+    margin-right: 6px;
+  }
+}
