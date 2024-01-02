@@ -1,0 +1,31 @@
+.profile {
+  width: 89%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 74px 0 40px 0;
+  font-family: Inter, Arial, sans-serif;
+}
+
+@media screen and (max-width: 769px) {
+  .profile {
+    padding-top: 236px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile {
+    padding-top: 70px;
+  }
+}
+
+.profile__title {
+  margin: 0;
+  color: #FFF;
+  text-align: center;
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+

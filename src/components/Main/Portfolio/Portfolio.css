@@ -1,0 +1,173 @@
+.student-portfolio {
+  width: 89%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Inter, Arial, sans-serif;
+  padding-bottom: 125px;
+  padding-top: 101px;
+}
+
+@media screen and (max-width: 769px) {
+  .student-portfolio {
+    padding-top: 91px;
+    padding-bottom: 90px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .student-portfolio {
+    width: 91.25%;
+    padding-top: 81px;
+    padding-bottom: 80px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .student-portfolio {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
+.student-portfolio__text {
+  width: 100%;
+}
+
+.student-portfolio__text-title {
+  width: 52%;
+  color: #8B8B8B;
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 20px;
+  margin: 0;
+
+}
+
+@media screen and (max-width: 426px) {
+  .student-portfolio__text-title {
+    font-size: 16px;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .student-portfolio__text-title {
+    font-size: 14px;
+  }
+}
+
+.student-portfolio__list {
+  list-style-type: none;
+  padding: 0;
+  width: 100%;
+  margin: 50px 0 0;
+}
+
+@media screen and (max-width: 426px) {
+  .student-portfolio__list{
+    margin: 45px 0 0;
+  }
+}
+
+@media screen and (max-width: 321px) {
+  .student-portfolio__list {
+    margin: 40px 0 0;
+  }
+}
+
+.student-portfolio__links {
+  border-bottom: 1px solid #424242;
+  padding-bottom: 19px;
+  margin-top: 20px;
+}
+
+.student-portfolio__links:first-child {
+  margin-top: 0;
+}
+
+.student-portfolio__links:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.student-portfolio__link {
+  text-decoration: none;
+  display: flex;
+  justify-content: space-between;
+  height: 50px;
+}
+
+
+
+@media screen and (max-width: 550px) {
+  .student-portfolio__link {
+    height: 39px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .student-portfolio__link {
+    height: 28px;
+  }
+}
+
+.student-portfolio__name {
+  color: #FFF;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 50px;
+  margin: 0;
+  letter-spacing: -1.2px;
+}
+
+@media screen and (max-width: 769px) {
+  .student-portfolio__name {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .student-portfolio__name {
+    font-size: 23px;
+    line-height: 39px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .student-portfolio__name {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}
+
+.student-portfolio__arrow {
+  color: #FFF;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 60px;
+  margin: 0;
+  letter-spacing: -1.2px;
+}
+
+@media screen and (max-width: 769px) {
+  .student-portfolio__arrow {
+    font-size: 28px;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .student-portfolio__arrow {
+    font-size: 23px;
+    line-height: 39px;
+  }
+}
+
+@media screen and (max-width: 426px) {
+  .student-portfolio__arrow {
+    font-size: 18px;
+    line-height: 28px;
+  }
+}

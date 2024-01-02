@@ -1,0 +1,155 @@
+.profile__form {
+  padding-top: 123px;
+  width: 410px;
+  display: flex;
+  flex-direction: column;
+  font-family: Inter, Arial, sans-serif;
+}
+
+@media screen and (max-width: 769px) {
+  .profile__form {
+    padding-top: 96px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .profile__form {
+    width: 80.50%;
+    padding-top: 80px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .profile__form {
+    width: 91.50%;
+    padding-top: 80px;
+  }
+}
+
+.profile__field {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 16px;
+  padding-top: 17px;
+  border-bottom: 1px solid #424242;
+}
+
+
+.profile__field:last-of-type {
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.profile__field:first-of-type {
+  padding-top: 0;
+}
+
+.profile__info {
+  width: 34.39%;
+  color: #FFF;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+}
+
+.profile__input {
+  width: 50%;
+  color: #FFF;
+  text-align: right;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+  outline: none;
+}
+
+
+.button-submit__conteiner {
+  width: 100%;
+  position: relative;
+  margin-top: 223px;
+}
+
+@media screen and (max-width: 769px) {
+  .button-submit__conteiner {
+    margin-top: 210px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .button-submit__conteiner {
+    margin-top: 379px;
+  }
+}
+
+
+.button-submit__error {
+  width: 100%;
+  position: absolute;
+  top: -32.83px;
+  left: 0;
+  color: #FF004C;
+  text-align: center;
+  font-size: 11px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+}
+
+.button-submit {
+  width: 100%;
+  height: 45px;
+  border: none;
+  padding: 0;
+  border-radius: 3px;
+  background-color: #3456F3;
+  color: #FFF;
+  text-align: center;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.button-submit_disabled {
+  background-color: #202020;
+  color: #424242;
+  cursor: auto;
+}
+
+.form__exit {
+  margin: 16px 0 0;
+  color: #FFF;
+  font-size: 13px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  cursor: pointer;
+}
+
+.form__input_error {
+  margin: 0;
+  align-self: flex-start;
+  position: absolute;
+  right: 0;
+  bottom: -14px;
+  color: #EE3465;
+  font-size: 10px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+@media screen and (max-width: 420px) {
+  .form__input_error {
+    font-size: 8px;
+  }
+}
