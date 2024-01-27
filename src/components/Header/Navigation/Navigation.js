@@ -1,6 +1,6 @@
 import './Navigation.css';
 import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { MenuContext, activeLinkContext } from '../../../contexts/CurrentUserContext';
 
 function Navigation(props) {

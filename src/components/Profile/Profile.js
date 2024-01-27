@@ -3,9 +3,10 @@ import React from 'react';
 import { useNavigate, } from 'react-router-dom';
 import { AppContext } from '../../contexts/CurrentUserContext';
 import FormProfile from './FormProfile/FormProfile';
-import InfoProfile from './InfoProfile/InfoProfile'
+import InfoProfile from './InfoProfile/InfoProfile';
+import api from '../../utils/MainApi';
 
-function Profile({ setLoggedIn }) {
+function Profile({ setLoggedIn, setCurrentUser }) {
 
   const currentUser = React.useContext(AppContext);
   const [name, setName] = React.useState('');
@@ -18,6 +19,7 @@ function Profile({ setLoggedIn }) {
   const [emailError, setEmailError] = React.useState('');
   const [formNotValid, setformNotValid] = React.useState(true);
 
+
   React.useEffect(() => {
     if (message) {
       setTimeout(() => {
@@ -26,20 +28,18 @@ function Profile({ setLoggedIn }) {
     }
   }, [message])
 
-  React.useEffect(() => {
-    if (currentUser) {
-      setName(currentUser.name);
-      setEmail(currentUser.email);
-    }
-  }, [currentUser]);
 
   React.useEffect(() => {
-    if (nameError || emailError || !name || !email) {
+    if (nameError || emailError || !name & !email) {
+      setformNotValid(true);
+    } else if (!name & email || name & !email) {
       setformNotValid(true);
     } else {
       setformNotValid(false);
     }
   }, [nameError, emailError, name, email]);
+
+
 
   function handleNameChange(e) {
     setName(e.target.value);
@@ -48,16 +48,23 @@ function Profile({ setLoggedIn }) {
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
-    if (e.target.validationMessage === 'Введите данные в указанном формате.') {
-      setEmailError(`${e.target.validationMessage} Например: user@mail.ru`);
+    const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(e.target.value);
+    if (!isValidEmail) {
+      setEmailError('Пожалуйста, введите корректный email адрес. Например: user.-2_@mail.ru');
     } else {
-      setEmailError(e.target.validationMessage);
+      setEmailError('');
     }
   }
 
 
   function signOut() {
     setLoggedIn(false);
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('activeLink');
+    localStorage.removeItem('searchResults');
+    localStorage.removeItem('isShortFilm');
+    localStorage.removeItem('savedMovies');
+    localStorage.removeItem('filterMyMovies')
     history('/', { replace: true })
   }
 
@@ -67,11 +74,50 @@ function Profile({ setLoggedIn }) {
 
   function formExit() {
     setSubmit(false)
-    setName(currentUser.name);
-    setEmail(currentUser.email);
+    setName('');
+    setEmail('');
     setNameError('');
-    setEmailError('')
+    setEmailError('');
+    setformNotValid(true);
   }
+
+  if (!currentUser) {
+    return null;
+  };
+
+  function handleSubmit(e) {
+    e.preventDefault();
+
+
+    const updatedName = name  ? name : currentUser.name;
+    const updatedEmail = email ? email : currentUser.email;
+
+    api.update({ name: updatedName, email: updatedEmail })
+      .then(res => {
+        if (res.status === 400) {
+          throw setMessage('Переданы некорректные данные при создании пользователя')
+        } else if (res.status === 409) {
+          throw setMessage('Пользователь с таким email уже существует')
+        } else if (res.status === 429) {
+          throw setMessage('Слишком частое обращение к серверу. Вы забанены на 15 минут.')
+        } else if (res.status === 200) {
+          return res.json()
+        }
+      })
+      .then(res => {
+        setMessage('Успех')
+        setCurrentUser(res.data);
+        setTimeout(() => {
+          formExit()
+        }, 1500)
+      })
+      .catch(() => {
+        setTimeout(() => {
+          setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+        }, 4501);
+      })
+  }
+
 
   return (
     <main className='profile'>
@@ -79,15 +125,15 @@ function Profile({ setLoggedIn }) {
       {submit
         ?
         <FormProfile
-        name={name}
-        email={email}
-        nameError={nameError}
-        emailError={emailError}
-        handleNameChange={handleNameChange}
-        handleEmailChange={handleEmailChange}
-        formExit={formExit}
-        message={message}
-        formNotValid={formNotValid} />
+          handleSubmit={handleSubmit}
+          nameError={nameError}
+          emailError={emailError}
+          handleNameChange={handleNameChange}
+          handleEmailChange={handleEmailChange}
+          formExit={formExit}
+          message={message}
+          formNotValid={formNotValid}
+        />
         :
         <InfoProfile signOut={signOut} editProfile={editProfile} />
       }

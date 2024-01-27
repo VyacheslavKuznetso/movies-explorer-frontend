@@ -1,0 +1,35 @@
+.list__pagination {
+  width: 320px;
+  height: 166px;
+  font-family: Inter, Arial, sans-serif;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  align-self: center;
+  margin: 0;
+}
+
+.list__pagination_disable {
+  display: none;
+}
+
+.list__more {
+  width: 100%;
+  height: 36px;
+  border-radius: 6px;
+  background-color: transparent;
+  margin-top: 50px;
+  margin-bottom: 80px;
+  cursor: pointer;
+  border-radius: 6px;
+  border: 1px solid #424242;
+  color: #fff;
+  padding: 0;
+}
+
+@media screen and (max-width: 480px) {
+  .list__pagination {
+    width: 240px;
+  }
+}

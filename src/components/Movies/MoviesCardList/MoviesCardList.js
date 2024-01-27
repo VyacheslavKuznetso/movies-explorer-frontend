@@ -4,18 +4,18 @@ import MoviesCard from '../MoviesCard/MoviesCard';
 
 
 
-
 function MoviesCardList(props) {
 
   const [renderMovies, setRenderMovies] = useState([]);
 
 
   useEffect(() => {
-    if (props.data) {
+    if (props.filteredData) {
       // Устанавливаем renderMovies при изменении props.data
-      setRenderMovies(props.data);
+      setRenderMovies(props.filteredData);
     }
-  }, [props.data]);
+  }, [props.filteredData]);
+
 
 
   return (
@@ -24,6 +24,8 @@ function MoviesCardList(props) {
         <MoviesCard
           key={movie.id || movie.movieId}
           movie={movie}
+          handleMovieLike={props.handleMovieLike}
+          handleMovieDelete={props.handleMovieDelete}
         />
       ))}
     </ul>

@@ -56,7 +56,7 @@
 }
 
 .profile__input {
-  width: 50%;
+  width: 40%;
   color: #FFF;
   text-align: right;
   font-size: 11px;
@@ -69,21 +69,25 @@
   outline: none;
 }
 
+.profile__input:focus {
+  outline: 0.5px solid #8B8B8B;
+}
 
-.button-submit__conteiner {
+
+.button-submit__container {
   width: 100%;
   position: relative;
   margin-top: 223px;
 }
 
 @media screen and (max-width: 769px) {
-  .button-submit__conteiner {
+  .button-submit__container {
     margin-top: 210px;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .button-submit__conteiner {
+  .button-submit__container {
     margin-top: 379px;
   }
 }
