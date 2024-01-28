@@ -8,10 +8,6 @@
 
 Адрес репозитория: https://github.com/VyacheslavKuznetso/movies-explorer-frontend
 
-Ссылка на пул реквест 
+IP 51.250.95.4
 
-Aдрес Vercel: 
-
-IP 
-
-Frontend 
+Frontend https://rumovies.nomoredomainsrocks.ru
