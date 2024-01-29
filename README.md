@@ -8,6 +8,6 @@
 
 Адрес репозитория: https://github.com/VyacheslavKuznetso/movies-explorer-frontend
 
-IP 51.250.95.4
+IP 158.160.97.244
 
 Frontend https://rumovies.nomoredomainsrocks.ru
