@@ -10,4 +10,4 @@
 
 IP 51.250.9.200
 
-Frontend https://rumovies.nomoredomainsrocks.ru
+Frontend https://rumovies.nomoredomainsmonster.ru
