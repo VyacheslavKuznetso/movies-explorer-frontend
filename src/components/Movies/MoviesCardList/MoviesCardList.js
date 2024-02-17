@@ -13,6 +13,8 @@ function MoviesCardList(props) {
     if (props.filteredData) {
       // Устанавливаем renderMovies при изменении props.data
       setRenderMovies(props.filteredData);
+    } else {
+
     }
   }, [props.filteredData]);
 

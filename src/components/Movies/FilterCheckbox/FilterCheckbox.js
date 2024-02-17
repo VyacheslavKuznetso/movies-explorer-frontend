@@ -11,6 +11,9 @@ function FilterCheckbox({ onFilterChange }) {
     if (pathname === '/movies') {
       if (localStorage.isShortFilm === 'true') setIsChecked(true);
       if (localStorage.isShortFilm === 'false') setIsChecked(false);
+    } else {
+      if (localStorage.isShortMyFilm === 'true') setIsChecked(true);
+      if (localStorage.isShortMyFilm === 'false') setIsChecked(false);
     }
   }, [pathname]);
 
@@ -26,7 +29,7 @@ function FilterCheckbox({ onFilterChange }) {
         className="movies__checkbox"
         type="checkbox"
         checked={isChecked}
-        onChange={() => {}}
+        onChange={() => { }}
         onClick={onChecked}
       />
       Короткометражки

@@ -36,11 +36,10 @@ function SearchForm({ movieName, setMovieName, onFilterChange, handleSubmit, Cle
         value={movieName || ''}
         placeholder='Фильм'
         name='movie'
-        minLength="6"
         autoComplete='off'
         onChange={handleMovie} />
         {pathname === '/saved-movies' ?
-        <button className={`movies-form__button-input ${movieName ? 'movies-form__button-input_clear-field' : ''}`} type='button' onClick={ClearField}></button>
+        <button className={`movies-form__button-input ${movieName !== '' ? 'movies-form__button-input_clear-field' : ''}`} type='button' onClick={ClearField}></button>
         :
         ''
         }
@@ -49,7 +48,7 @@ function SearchForm({ movieName, setMovieName, onFilterChange, handleSubmit, Cle
         </button>
         <p className='movies-form_error'>{movieError}</p>
       </div>
-      {localStorage.activeLink !== '2' ? <FilterCheckbox onFilterChange={onFilterChange}/> : ''}
+      <FilterCheckbox onFilterChange={onFilterChange}/>
     </form >
     </>
   )

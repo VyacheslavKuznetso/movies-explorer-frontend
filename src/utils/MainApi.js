@@ -7,7 +7,7 @@ class Api {
     if (res.ok) {
       return res.json();
     }
-    return Promise.reject(`Ошибка: ${res}`);
+    return Promise.reject(`Ошибка: ${res.status}`);
   }
 
   getFavoredMoves() {
@@ -71,6 +71,7 @@ class Api {
           return response;
         }
       })
+
   }
 
   register({ name, email, password }) {

@@ -30,13 +30,29 @@ function Movies({ handleMovieLike, handleMovieDelete }) {
   const [renderMovies, setRenderMovies] = React.useState([]);
   const [quantity, setQuantity] = React.useState(DESKTOP_SETTINGS.defaultMovies);
   const [showMoreFilms, setShowMoreFilms] = React.useState(DESKTOP_SETTINGS.moreStep);
-  const { pathname } = useLocation();
 
   // сохраняем состояние чекбокса в localStorage
   const onFilterChange = (isChecked) => {
     localStorage.setItem('isShortFilm', !isChecked)
     setIsShortFilm(!isChecked)
   }
+
+  useEffect(() => {
+    let filteredSearchResults = JSON.parse(localStorage.getItem('searchResults'));
+
+    // Применяем фильтр короткометражек, если чекбокс отмечен
+    if (isShortFilm) {
+      if (filteredSearchResults !== null) {
+        let shortFilm = filterByDuration(filteredSearchResults.movies);
+        setMovies(shortFilm)
+      }
+    } else {
+      if (filteredSearchResults !== null) {
+        setMovies(filteredSearchResults.movies);
+      }
+    }
+
+  }, [isShortFilm]);
 
   useEffect(() => {
     const storedSearchResults = JSON.parse(localStorage.getItem('searchResults'));
@@ -132,7 +148,7 @@ function Movies({ handleMovieLike, handleMovieDelete }) {
 
   useEffect(() => {
     // Обрабатываем количество отображаемых карточек
-    if (pathname === '/movies') {
+    if (currentUrl === '/movies') {
       setRenderMovies(movies.slice(0, quantity));
     } else {
       setRenderMovies(movies);
@@ -163,10 +179,11 @@ function Movies({ handleMovieLike, handleMovieDelete }) {
     setRenderMovies(newArray);
   }
 
+
   return (
     <main className='movies'>
       <div className='movies-container'>
-        <SearchForm movieName={movieName} setMovieName={setMovieName} onFilterChange={onFilterChange} handleSubmit={handleSubmit} />
+        <SearchForm movieName={movieName} setMovieName={setMovieName} handleSubmit={handleSubmit} onFilterChange={onFilterChange} />
       </div>
       <div className="movies-card__list">
         {loading

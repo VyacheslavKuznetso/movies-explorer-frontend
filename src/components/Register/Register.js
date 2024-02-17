@@ -66,45 +66,52 @@ function Register(props) {
 
     api.register({ name, email, password })
       .then(res => {
-        if (res.status === 400) {
-          throw setMessage('Переданы некорректные данные при создании пользователя');
-        } else if (res.status === 409) {
-          throw setMessage('Пользователь с таким email уже существует');
-        }
-        else if (res.status === 201) {
+
+        if (res.status === 201) {
           return res.json();
         }
 
         api.login({ email, password })
           .then(res => {
-            if (res.status === 401) {
-              throw setMessage('Неправильные почта или пароль');
-            } else if (res.status === 400) {
-              throw setMessage('Переданы некорректные данные');
-            } else if (res.token) {
-              props.setLoggedIn(true)
-              setMessage('Успех');
+            if (res.token) {
               setTimeout(() => {
+                setMessage('Успех');
+              }, 2225);
+              setTimeout(() => {
+                props.setLoggedIn(true)
                 props.handleLinkClick(1)
-                history('/movies', { replace: true })
-              }, 4501)
+                history('/movies', { replace: true });
+                setName('');
+                setEmail('');
+                setPassword('');
+              }, 4501);
             }
           })
           .catch((err) => {
             setTimeout(() => {
-              setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+              if (err === 'Ошибка: 401') {
+                setMessage('Неправильные почта или пароль');
+              } else if (err === 'Ошибка: 400') {
+                setMessage('Переданы некорректные данные');
+              } else {
+                setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+              }
             }, 4501);
           });
       })
       .catch((err) => {
         setTimeout(() => {
-          setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+          if (err === 'Ошибка: 400') {
+            setMessage('Переданы некорректные данные');
+          } else if (err === 'Ошибка: 409') {
+            setMessage('Пользователь с таким email уже существует');
+          } else {
+            setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+          }
         }, 4501);
       })
       .finally(() => {
-        setName('');
-        setEmail('');
-        setPassword('');
+        setformNotValid(true)
       });
   }
 

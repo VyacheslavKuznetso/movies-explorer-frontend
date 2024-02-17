@@ -11,6 +11,8 @@ function Profile({ setLoggedIn, setCurrentUser }) {
   const currentUser = React.useContext(AppContext);
   const [name, setName] = React.useState('');
   const [email, setEmail] = React.useState('');
+  const [newEmail, setNewEmail] = React.useState('');
+  const [newName, setNewName] = React.useState('');
   const history = useNavigate();
   const [submit, setSubmit] = React.useState(false)
 
@@ -43,11 +45,13 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
   function handleNameChange(e) {
     setName(e.target.value);
+    setNewName(e.target.value)
     setNameError(e.target.validationMessage);
   }
 
   function handleEmailChange(e) {
     setEmail(e.target.value);
+    setNewEmail(e.target.value);
     const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(e.target.value);
     if (!isValidEmail) {
       setEmailError('Пожалуйста, введите корректный email адрес. Например: user.-2_@mail.ru');
@@ -63,8 +67,9 @@ function Profile({ setLoggedIn, setCurrentUser }) {
     localStorage.removeItem('activeLink');
     localStorage.removeItem('searchResults');
     localStorage.removeItem('isShortFilm');
+    localStorage.removeItem('isShortMyFilm');
     localStorage.removeItem('savedMovies');
-    localStorage.removeItem('filterMyMovies')
+    localStorage.removeItem('filterMyMovies');
     history('/', { replace: true })
   }
 
@@ -85,35 +90,53 @@ function Profile({ setLoggedIn, setCurrentUser }) {
     return null;
   };
 
+
+
   function handleSubmit(e) {
     e.preventDefault();
 
+    setformNotValid(true)
 
-    const updatedName = name  ? name : currentUser.name;
+    // перед отправкой проверяем значения, для отправки новой почты или имени
+    const isUniqueName = currentUser.name !== newName;
+    const isUniqueEmail = currentUser.email !== newEmail;
+    if (!isUniqueEmail) {
+      setEmailError('По сравнению с текущим email, данные не изменены.');
+      return null
+    } else if (!isUniqueName) {
+      setNameError('По сравнению с текущим именем, данные не изменены.');
+      return null
+    }
+
+    const updatedName = name ? name : currentUser.name;
     const updatedEmail = email ? email : currentUser.email;
 
     api.update({ name: updatedName, email: updatedEmail })
       .then(res => {
-        if (res.status === 400) {
-          throw setMessage('Переданы некорректные данные при создании пользователя')
-        } else if (res.status === 409) {
-          throw setMessage('Пользователь с таким email уже существует')
-        } else if (res.status === 429) {
-          throw setMessage('Слишком частое обращение к серверу. Вы забанены на 15 минут.')
-        } else if (res.status === 200) {
+        if (res.status === 200) {
           return res.json()
         }
       })
       .then(res => {
-        setMessage('Успех')
-        setCurrentUser(res.data);
         setTimeout(() => {
+          setMessage('Успех')
+        }, 2000)
+        setTimeout(() => {
+          setCurrentUser(res.data);
           formExit()
-        }, 1500)
+        }, 4501)
       })
-      .catch(() => {
+      .catch((err) => {
         setTimeout(() => {
-          setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+          if (err === 'Ошибка: 400') {
+            setMessage('Переданы некорректные данные при создании пользователя')
+          } else if (err === 'Ошибка: 409') {
+            setMessage('Пользователь с таким email уже существует')
+          } else if (err === 'Ошибка: 429') {
+            setMessage('Слишком частое обращение к серверу. Вы забанены на 15 минут.')
+          } else {
+            setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+          }
         }, 4501);
       })
   }

@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Routes, Route, useNavigate, Navigate, useLocation, Redirect, Switch } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { AppContext, MenuContext, LoggedInContext, activeLinkContext, SavedMyMoviesContext } from '../../contexts/CurrentUserContext';
 import Header from '../Header/Header';
@@ -15,7 +15,7 @@ import Login from '../Login/Login';
 import * as auth from '../../utils/auth';
 import api from '../../utils/MainApi';
 import Movies from '../Movies/Movies';
-import SavedMovies from '../SavedMovies/SavedMovies'
+import SavedMovies from '../SavedMovies/SavedMovies';
 
 
 function App() {
@@ -26,13 +26,7 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  const navigate = useNavigate();
-  const [isShortFilm, setIsShortFilm] = useState(false);
-
-  // стейт фильмов, найденных в сохраненных
-  const [foundSavedMovies, setFoundSavedMovies] = useState([]);
-  // стейт поиска на странице сохраненных фильмов
-  const [isSearchStarted, setIsSearchStarted] = useState(false);
+  const [message, setMessage] = React.useState('');
 
 
   const toggleBurger = () => {
@@ -63,20 +57,25 @@ function App() {
   };
 
   useEffect(() => {
-    if (loggedIn) {
+    if (loggedIn && localStorage.getItem('jwt')) {
       Promise.all([api.getUserInfo(), api.getFavoredMoves()])
         .then(([userInfo, movesInfo]) => {
           setCurrentUser(userInfo.data);
-          localStorage.setItem('savedMovies', JSON.stringify(movesInfo.movies));
-          setSavedMovies(movesInfo.movies);
+          if(movesInfo.movies.length !== 0) {
+            localStorage.setItem('savedMovies', JSON.stringify(movesInfo.movies));
+            setSavedMovies(movesInfo.movies);
+          } else {
+            setMessage('У вас пока нет сохраненных фильмов 🎞')
+          }
         })
         .catch(console.error);
     }
-  }, [loggedIn, navigate])
+  }, [loggedIn])
 
   useEffect(() => {
-    loggedIn &&
+    if (loggedIn && localStorage.getItem('jwt')) {
       localStorage.setItem('savedMovies', JSON.stringify(savedMovies));
+    }
   }, [savedMovies, loggedIn]);
 
 
@@ -105,22 +104,26 @@ function App() {
   }, [])
 
   const handleTokenCheck = () => {
-    setCurrentPath(window.location.pathname);
     if (localStorage.getItem('jwt')) {
       const jwt = localStorage.getItem('jwt');
       auth.checkToken(jwt)
         .then((res) => {
           if (res) {
             setLoggedIn(true);
-            navigate({ currentPath })
           }
         })
         .catch(console.error);
     } else {
       setLoggedIn(false)
-      navigate('/', { replace: true })
+      localStorage.removeItem('activeLink');
+      localStorage.removeItem('searchResults');
+      localStorage.removeItem('isShortFilm');
+      localStorage.removeItem('isShortMyFilm');
+      localStorage.removeItem('savedMovies');
+      localStorage.removeItem('filterMyMovies');
     }
   }
+
 
 
 
@@ -147,16 +150,27 @@ function App() {
                       </ProtectedRoute>
                     } />
                     <Route path='/signup' element={
-                      <Register handleLinkClick={handleLinkClick} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />
+                      loggedIn
+                        ?
+                        <Navigate to='/' replace />
+                        : (
+                          <Register handleLinkClick={handleLinkClick} setCurrentUser={setCurrentUser} setLoggedIn={setLoggedIn} />
+                        )
                     } />
                     <Route path='/signin' element={
-                      <Login handleLinkClick={handleLinkClick} setLoggedIn={setLoggedIn} />
+                      loggedIn
+                        ?
+                        <Navigate to='/' replace />
+                        : (
+                          <Login handleLinkClick={handleLinkClick} setLoggedIn={setLoggedIn} />
+                        )
                     } />
                     <Route path='/saved-movies' element={
                       <ProtectedRoute>
                         <Header toggleBurger={toggleBurger} handleLinkClick={handleLinkClick} />
                         <SavedMovies
                           handleMovieDelete={handleMovieDelete}
+                          message={message}
                         />
                         <Footer />
                       </ProtectedRoute>

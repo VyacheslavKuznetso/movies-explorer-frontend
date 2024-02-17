@@ -58,27 +58,32 @@ function Login({ handleLinkClick, setLoggedIn }) {
 
     api.login({ email, password })
       .then(res => {
-        if (res.status === 401) {
-          throw setMessage('Неправильные почта или пароль');
-        } else if (res.status === 400) {
-          throw setMessage('Переданы некорректные данные');
-        } else if (res.token) {
-          setLoggedIn(true)
-          setMessage('Успех');
+        if (res.token) {
           setTimeout(() => {
+            setMessage('Успех');
+          }, 2225);
+          setTimeout(() => {
+            setLoggedIn(true)
             handleLinkClick(1)
-            history('/movies', { replace: true })
-          }, 4501)
+            history('/movies', { replace: true });
+            setEmail('');
+            setPassword('');
+          }, 4501);
         }
       })
       .catch((err) => {
         setTimeout(() => {
+          if (err === 'Ошибка: 401') {
+            setMessage('Неправильные почта или пароль');
+          } else if (err === 'Ошибка: 400') {
+            setMessage('Переданы некорректные данные');
+          } else {
           setMessage('Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.');
+          }
         }, 4501);
       })
       .finally(() => {
-        setEmail('');
-        setPassword('');
+        setformNotValid(true)
       });
   }
 

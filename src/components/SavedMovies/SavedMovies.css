@@ -56,3 +56,49 @@
     width: 91.3%;
   }
 }
+
+.isNot-saved-movies {
+  visibility: hidden;
+  pointer-events: none;
+  color: #4285F4;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-align: center;
+  opacity: 0;
+  transition: visibility 0.9s, opacity 0.9s ease-in;
+  position: absolute;
+  left: auto;
+  bottom: -100px;
+}
+
+.isNot-saved-movies_error {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+
+.saved__message {
+  visibility: hidden;
+  pointer-events: none;
+  color: #4285F4;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-align: center;
+  opacity: 0;
+  transition: visibility 0.1s, opacity 0.1s ease-in;
+  position: absolute;
+  left: auto;
+  bottom: -100px;
+}
+
+.saved__message_vizible {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
