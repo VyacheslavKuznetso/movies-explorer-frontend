@@ -14,7 +14,7 @@ function FormProfile(props) {
           <input required
             className='profile__input'
             type="text"
-            placeholder={currentUser.name}
+            value={props.name}
             onChange={props.handleNameChange}
             name="name"
             minLength="2"
@@ -26,7 +26,7 @@ function FormProfile(props) {
           <input required
             className='profile__input'
             type="text"
-            placeholder={currentUser.email}
+            value={props.email}
             onChange={props.handleEmailChange}
             name="email"
             pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />

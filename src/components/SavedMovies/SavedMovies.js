@@ -7,7 +7,7 @@ import { SavedMyMoviesContext } from '../../contexts/CurrentUserContext';
 import { filterByName, filterByDuration } from '../../utils/utils';
 
 
-function SavedMovies({ handleMovieDelete, message }) {
+function SavedMovies({ handleMovieDelete }) {
 
   const [movies, setMovies] = useState([]);
   const savedMovies = React.useContext(SavedMyMoviesContext);
@@ -17,6 +17,7 @@ function SavedMovies({ handleMovieDelete, message }) {
   const location = useLocation();
   const currentUrl = location.pathname;
   const [isShortMyFilm, setIsShortMyFilm] = React.useState(false);
+  const [message, setMessage] = React.useState('У вас пока нет сохраненных фильмов 🎞');
 
   // сохраняем состояние чекбокса в localStorage
   const onFilterChange = (isChecked) => {
@@ -133,13 +134,12 @@ function SavedMovies({ handleMovieDelete, message }) {
     }));
   }
 
-
   return (
     <main className="saved">
       <div className='saved-conteiner'>
         <SearchForm movieName={movieName} setMovieName={setMovieName} handleSubmit={handleSearchMovies} ClearField={ClearField} onFilterChange={onFilterChange} />
         <p className={`isNot-saved-movies ${error ? 'isNot-saved-movies_error' : ''}`}>{error}</p>
-        <p className={`saved__message ${message !== '' ? 'saved__message_vizible' : ''}`}>{message}</p>
+        <p className={`saved__message ${savedMovies.length !== 0 ? '' : 'saved__message_vizible'}`}>{message}</p>
       </div>
       <div className="saved-card__list">
         <MoviesCardList filteredData={filterMyMovies.length !== 0 ? filterMyMovies : movies} handleMovieDelete={handleMovieDelete} />

@@ -1,5 +1,5 @@
 import './Profile.css';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useNavigate, } from 'react-router-dom';
 import { AppContext } from '../../contexts/CurrentUserContext';
 import FormProfile from './FormProfile/FormProfile';
@@ -22,6 +22,15 @@ function Profile({ setLoggedIn, setCurrentUser }) {
   const [formNotValid, setformNotValid] = React.useState(true);
 
 
+
+  React.useEffect(() => {
+    if(currentUser) {
+      setName(currentUser.name)
+      setEmail(currentUser.email)
+    }
+  }, [currentUser])
+
+
   React.useEffect(() => {
     if (message) {
       setTimeout(() => {
@@ -36,6 +45,8 @@ function Profile({ setLoggedIn, setCurrentUser }) {
       setformNotValid(true);
     } else if (!name & email || name & !email) {
       setformNotValid(true);
+    } else if (currentUser.email === email && currentUser.name === name) {
+      setformNotValid(true);
     } else {
       setformNotValid(false);
     }
@@ -45,21 +56,48 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
   function handleNameChange(e) {
     setName(e.target.value);
-    setNewName(e.target.value)
     setNameError(e.target.validationMessage);
+    console.log(currentUser.name !== name);
+    const isNameChanged = currentUser.name === e.target.value;;
+    console.log(isNameChanged);
+    if(isNameChanged) {
+      setNameError('По сравнению с текущим именем, данные не изменены.');
+
+    }
   }
 
   function handleEmailChange(e) {
+    // setNewEmail(e.target.value);
     setEmail(e.target.value);
-    setNewEmail(e.target.value);
     const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(e.target.value);
+    const isEmailChanged = currentUser.email === e.target.value;
+    console.log(isEmailChanged);
     if (!isValidEmail) {
       setEmailError('Пожалуйста, введите корректный email адрес. Например: user.-2_@mail.ru');
-    } else {
+    } else if (isEmailChanged) {
+      setEmailError('По сравнению с текущим email, данные не изменены.');
+
+    } else{
       setEmailError('');
     }
   }
 
+  // function handleEmailChange(e) {
+  //   const newEmail = e.target.value;
+
+  //   setEmail((prevEmail) => newEmail); // Используйте функцию обратного вызова
+
+  //   const isValidEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(newEmail);
+  //   const isEmailChanged = newEmail !== currentUser.email;
+
+  //   if (!isValidEmail) {
+  //     setEmailError('Пожалуйста, введите корректный email адрес. Например: user.-2_@mail.ru');
+  //   } else if (!isEmailChanged) {
+  //     setEmailError('По сравнению с текущим email, данные не изменены.');
+  //   } else {
+  //     setEmailError('');
+  //   }
+  // }
 
   function signOut() {
     setLoggedIn(false);
@@ -79,16 +117,13 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
   function formExit() {
     setSubmit(false)
-    setName('');
-    setEmail('');
+    // setName('');
+    // setEmail('');
     setNameError('');
     setEmailError('');
     setformNotValid(true);
   }
 
-  if (!currentUser) {
-    return null;
-  };
 
 
 
@@ -97,16 +132,16 @@ function Profile({ setLoggedIn, setCurrentUser }) {
 
     setformNotValid(true)
 
-    // перед отправкой проверяем значения, для отправки новой почты или имени
-    const isUniqueName = currentUser.name !== newName;
-    const isUniqueEmail = currentUser.email !== newEmail;
-    if (!isUniqueEmail) {
-      setEmailError('По сравнению с текущим email, данные не изменены.');
-      return null
-    } else if (!isUniqueName) {
-      setNameError('По сравнению с текущим именем, данные не изменены.');
-      return null
-    }
+    // // перед отправкой проверяем значения, для отправки новой почты или имени
+    // const isUniqueName = currentUser.name !== newName;
+    // const isUniqueEmail = currentUser.email !== newEmail;
+    // if (!isUniqueEmail) {
+    //   setEmailError('По сравнению с текущим email, данные не изменены.');
+    //   return null
+    // } else if (!isUniqueName) {
+    //   setNameError('По сравнению с текущим именем, данные не изменены.');
+    //   return null
+    // }
 
     const updatedName = name ? name : currentUser.name;
     const updatedEmail = email ? email : currentUser.email;
@@ -141,6 +176,10 @@ function Profile({ setLoggedIn, setCurrentUser }) {
       })
   }
 
+  if (!currentUser) {
+    return null;
+  };
+
 
   return (
     <main className='profile'>
@@ -156,6 +195,8 @@ function Profile({ setLoggedIn, setCurrentUser }) {
           formExit={formExit}
           message={message}
           formNotValid={formNotValid}
+          name={name}
+          email={email}
         />
         :
         <InfoProfile signOut={signOut} editProfile={editProfile} />

@@ -26,7 +26,6 @@ function App() {
   const [savedMovies, setSavedMovies] = useState([]);
   const [loggedIn, setLoggedIn] = useState(true);
   const [currentPath, setCurrentPath] = useState(window.location.pathname);
-  const [message, setMessage] = React.useState('');
 
 
   const toggleBurger = () => {
@@ -64,8 +63,6 @@ function App() {
           if(movesInfo.movies.length !== 0) {
             localStorage.setItem('savedMovies', JSON.stringify(movesInfo.movies));
             setSavedMovies(movesInfo.movies);
-          } else {
-            setMessage('У вас пока нет сохраненных фильмов 🎞')
           }
         })
         .catch(console.error);
@@ -170,7 +167,6 @@ function App() {
                         <Header toggleBurger={toggleBurger} handleLinkClick={handleLinkClick} />
                         <SavedMovies
                           handleMovieDelete={handleMovieDelete}
-                          message={message}
                         />
                         <Footer />
                       </ProtectedRoute>
