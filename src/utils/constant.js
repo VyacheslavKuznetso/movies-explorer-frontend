@@ -5,13 +5,13 @@ export const DESKTOP_SETTINGS = {
 };
 
 export const TABLET_SETTINGS = {
-  maxWidth: 768,
+  maxWidth: 1279,
   defaultMovies: 8,
   moreStep: 2,
 };
 
 export const MOBILE_SETTINGS = {
-  maxWidth: 480,
+  maxWidth: 768,
   defaultMovies: 5,
   moreStep: 2,
 };
