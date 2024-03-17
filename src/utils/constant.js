@@ -1,3 +1,5 @@
+export const DURATION_SHORTS = 40;
+
 export const DESKTOP_SETTINGS = {
   maxWidth: 1280,
   defaultMovies: 12,

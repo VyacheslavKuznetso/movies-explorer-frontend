@@ -1,3 +1,5 @@
+import { DURATION_SHORTS } from './constant'
+
 // функция фильтрации фильмов по имени
 export const filterByName = (movies, movieName) => {
   return movies.filter(movie => {
@@ -13,5 +15,5 @@ export const filterByName = (movies, movieName) => {
 
 // функция фильтрации короткометражек
 export const filterByDuration = movies => {
-  return movies.filter(movie => movie.duration <= 40);
+  return movies.filter(movie => movie.duration <= DURATION_SHORTS);
 }
