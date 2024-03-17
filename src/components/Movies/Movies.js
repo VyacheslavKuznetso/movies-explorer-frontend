@@ -35,33 +35,33 @@ function Movies({ handleMovieLike, handleMovieDelete }) {
   const onFilterChange = (isChecked) => {
     localStorage.setItem('isShortFilm', !isChecked)
     setIsShortFilm(!isChecked)
+    filterByCheckboxStatus(!isChecked)
+  }
+
+  function filterByCheckboxStatus (isChecked) {
+    setError('')
+    setLoading(true);
+
+    setTimeout(() => {
+      filterMoviesByName(data, movieName, isChecked)
+
+      setLoading(false);
+
+    }, 4500)
   }
 
   useEffect(() => {
-    let filteredSearchResults = JSON.parse(localStorage.getItem('searchResults'));
+    if (currentUrl === '/movies') {
+      const storedSearchResults = JSON.parse(localStorage.getItem('searchResults'));
 
-    // Применяем фильтр короткометражек, если чекбокс отмечен
-    if (isShortFilm) {
-      if (filteredSearchResults !== null) {
-        let shortFilm = filterByDuration(filteredSearchResults.movies);
-        setMovies(shortFilm)
+      if (storedSearchResults) {
+        setMovieName(storedSearchResults.movieName);
+        setMovies(storedSearchResults.movies);
+        setError(storedSearchResults.filterError)
       }
-    } else {
-      if (filteredSearchResults !== null) {
-        setMovies(filteredSearchResults.movies);
-      }
+
     }
-
-  }, [isShortFilm]);
-
-  useEffect(() => {
-    const storedSearchResults = JSON.parse(localStorage.getItem('searchResults'));
-
-    if (storedSearchResults) {
-      setMovieName(storedSearchResults.movieName);
-      setMovies(storedSearchResults.movies);
-    }
-  }, []);
+  }, [currentUrl]);
 
   // установка начальных значений из localStorage для страницы с поиском фильмов
   useEffect(() => {
@@ -102,17 +102,7 @@ function Movies({ handleMovieLike, handleMovieDelete }) {
     if (data.length === 0) return;
 
     setTimeout(() => {
-
-      let filteredMovies;
-      // Применяем фильтр короткометражек, если чекбокс отмечен
-      if (isShortFilm) {
-        let shortFilm = filterByDuration(data);
-        filteredMovies = shortFilm;
-      } else {
-        filteredMovies = data;
-      }
-
-      filterMoviesByName(filteredMovies, movieName);
+      filterMoviesByName(data, movieName)
 
       setLoading(false);
 
@@ -120,20 +110,50 @@ function Movies({ handleMovieLike, handleMovieDelete }) {
 
   }
 
-  function filterMoviesByName(movies, movieName) {
+  function filterMoviesByName(movies, movieName, isChecked = isShortFilm) {
+
+    if(movieName === '') return;
+
+    let filterError 
     let foundMovies = filterByName(movies, movieName);
 
     if (foundMovies.length === 0) {
-      setError('По вашему запросу не найдено');
+      setError('По вашему запросу ничего не найдено');
+      filterError = 'По вашему запросу ничего не найдено';
     }
 
-    setMovies(foundMovies)
+    let resMovies = filterFoundMovies(foundMovies, isChecked)
+
+    if (resMovies.length === 0) {
+      setError('По вашему запросу ничего не найдено');
+      filterError = 'По вашему запросу ничего не найдено';
+    }
+
+    setMovies(resMovies)
     localStorage.setItem('searchResults', JSON.stringify({
+      filterError,
       movieName,
-      movies: foundMovies,
+      movies: resMovies,
     }));
+
+    setLoading(false);
   }
 
+
+  function filterFoundMovies(foundMovies, isChecked) {
+
+    let filteredMovies;
+    console.log(isChecked);
+    // Применяем фильтр короткометражек, если чекбокс отмечен
+    if (isChecked) {
+      let shortFilm = filterByDuration(foundMovies);
+      filteredMovies = shortFilm;
+    } else {
+      filteredMovies = foundMovies;
+    }
+
+    return filteredMovies
+  }
 
 
 

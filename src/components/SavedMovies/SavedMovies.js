@@ -9,46 +9,38 @@ import { filterByName, filterByDuration } from '../../utils/utils';
 
 function SavedMovies({ handleMovieDelete }) {
 
-  const [movies, setMovies] = useState([]);
   const savedMovies = React.useContext(SavedMyMoviesContext);
-  const [error, setError] = React.useState();
+  const [movies, setMovies] = useState(savedMovies);
+  const [error, setError] = React.useState('');
   const [movieName, setMovieName] = React.useState('');
-  const [filterMyMovies, setfilterMyMovies] = React.useState([]);
   const location = useLocation();
   const currentUrl = location.pathname;
   const [isShortMyFilm, setIsShortMyFilm] = React.useState(false);
-  const [message, setMessage] = React.useState('У вас пока нет сохраненных фильмов 🎞');
+  const [message, setMessage] = React.useState('');
+
+
+  useEffect(() => {
+    if(savedMovies.length === 0) {
+      setTimeout(() => {
+        setMessage('У вас пока нет сохраненных фильмов 🎞')
+      }, 900)
+    }
+  }, [])
 
   // сохраняем состояние чекбокса в localStorage
   const onFilterChange = (isChecked) => {
     localStorage.setItem('isShortMyFilm', !isChecked)
-    setIsShortMyFilm(!isChecked)
+    setIsShortMyFilm(!isChecked);
+
+    filterByCheckboxStatus(!isChecked)
   }
 
-  useEffect(() => {
-    let filteredSavedMovies = JSON.parse(localStorage.getItem('savedMovies'));
-    let filteredMyMovies = JSON.parse(localStorage.getItem('filterMyMovies'));
+  function filterByCheckboxStatus(isChecked) {
+    setError('')
 
-    // Применяем фильтр короткометражек, если чекбокс отмечен
-    if (isShortMyFilm) {
-      if (filteredMyMovies !== null) {
-        let shortFilm = filterByDuration(filteredMyMovies.movies);
-        setfilterMyMovies(shortFilm)
-      } else {
-        const shortFilm = filterByDuration(filteredSavedMovies);
-        setMovies(shortFilm)
-      }
-    } else if (!isShortMyFilm) {
-      if (filteredMyMovies !== null) {
-        setfilterMyMovies(filteredMyMovies.movies);
-      } else {
-        setMovies(filteredSavedMovies)
-      }
-    }
+    filterMoviesByName(savedMovies, movieName, isChecked)
 
-  }, [isShortMyFilm]);
-
-
+  }
 
   // установка начальных значений из localStorage для страницы с поиском фильмов
   useEffect(() => {
@@ -59,79 +51,93 @@ function SavedMovies({ handleMovieDelete }) {
   }, [currentUrl]);
 
 
-  React.useEffect(() => {
-    if (error) {
-      setTimeout(() => {
-        setError('');
-        setMovies(savedMovies)
-      }, 4500);
-    }
-  }, [error])
-
-  useEffect(() => {
-    if (currentUrl === '/saved-movies') {
-      if (!localStorage.filterMyMovies) {
-        localStorage.setItem('isShortMyFilm', JSON.stringify(false));
-      }
-      setMovies(savedMovies);
-    }
-  }, [savedMovies])
-
-
   useEffect(() => {
     const storedSearchResults = JSON.parse(localStorage.getItem('filterMyMovies'));
 
     if (storedSearchResults) {
       setMovieName(storedSearchResults.movieName);
-      setfilterMyMovies(storedSearchResults.movies);
+      setMovies(storedSearchResults.movies);
+      setError(storedSearchResults.filterError)
     }
   }, []);
 
 
-
+  // сбросить запрос
   function ClearField() {
     if (localStorage.filterMyMovies) {
       setTimeout(() => {
         localStorage.removeItem('filterMyMovies');
-        setfilterMyMovies('');
+        localStorage.setItem('isShortMyFilm', JSON.stringify(false));
         setMovieName('');
-
+        setIsShortMyFilm(false);
+        setError('')
+        setMovies(savedMovies)
       }, 300)
     } else {
-      setMovieName('')
+      setTimeout(() => {
+        setMovieName('');
+        localStorage.setItem('isShortMyFilm', JSON.stringify(false));
+        setIsShortMyFilm(false);
+        setError('')
+        setMovies(savedMovies)
+
+      }, 300)
     }
   }
 
   function handleSearchMovies(e) {
     e.preventDefault();
 
-    let filteredMovies;
-    // Применяем фильтр короткометражек, если чекбокс отмечен
-    if (isShortMyFilm) {
-      let shortFilm = filterByDuration(movies);
-      filteredMovies = shortFilm;
-    } else {
-      filteredMovies = movies;
-    }
+    setError('')
 
-    filterMoviesByName(filteredMovies, movieName);
+    filterMoviesByName(savedMovies, movieName)
   }
 
+  function filterMoviesByName(movies, movieName, isChecked = isShortMyFilm) {
 
-  function filterMoviesByName(movies, movieName) {
-    let filterMovies = filterByName(movies, movieName);
+    let filterError
+    console.log(movieName);
+    let foundMovies = filterByName(movies, movieName);
 
-    if (filterMovies.length === 0) {
-      setError('Список пуст');
+    console.log(foundMovies);
+
+    if (foundMovies.length === 0) {
+      setError('По вашему запросу ничего не найдено');
+      filterError = 'По вашему запросу ничего не найдено'
       setMovies([])
     }
 
-    setfilterMyMovies(filterMovies);
+    let resMovies = filterFoundMovies(foundMovies, isChecked)
 
+    if (resMovies.length === 0) {
+      setError('По вашему запросу ничего не найдено');
+      filterError = 'По вашему запросу ничего не найдено'
+      setMovies([])
+    }
+
+    setMovies(resMovies)
+    console.log({error});
     localStorage.setItem('filterMyMovies', JSON.stringify({
+      filterError,
       movieName,
-      movies: filterMovies,
+      movies: resMovies
     }));
+  }
+
+
+  function filterFoundMovies(foundMovies, isChecked) {
+
+    let filteredMovies;
+    console.log(isChecked);
+    // Применяем фильтр короткометражек, если чекбокс отмечен
+    if (isChecked) {
+      let shortFilm = filterByDuration(foundMovies);
+      filteredMovies = shortFilm;
+    } else {
+      filteredMovies = foundMovies;
+    }
+
+    return filteredMovies
   }
 
   return (
@@ -142,7 +148,7 @@ function SavedMovies({ handleMovieDelete }) {
         <p className={`saved__message ${savedMovies.length !== 0 ? '' : 'saved__message_vizible'}`}>{message}</p>
       </div>
       <div className="saved-card__list">
-        <MoviesCardList filteredData={filterMyMovies.length !== 0 ? filterMyMovies : movies} handleMovieDelete={handleMovieDelete} />
+        <MoviesCardList filteredData={movies} handleMovieDelete={handleMovieDelete} />
       </div>
     </main>
   )
