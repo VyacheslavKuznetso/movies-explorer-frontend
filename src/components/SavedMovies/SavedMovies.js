@@ -45,7 +45,7 @@ function SavedMovies({ handleMovieDelete }) {
 
   function filterByCheckboxStatus(isChecked) {
     setError('')
-
+    if (savedMovies.length === 0) return;
     filterMoviesByName(movies, movieName, isChecked)
 
   }
@@ -104,7 +104,7 @@ function SavedMovies({ handleMovieDelete }) {
   }
 
   function filterMoviesByName(movies, movieName, isChecked = isShortMyFilm) {
-
+    if (savedMovies.length === 0) return;
     let filterError
     console.log(movieName);
     let foundMovies = filterByName(movies, movieName);
