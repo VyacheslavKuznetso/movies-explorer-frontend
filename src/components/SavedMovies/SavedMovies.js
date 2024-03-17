@@ -10,7 +10,8 @@ import { filterByName, filterByDuration } from '../../utils/utils';
 function SavedMovies({ handleMovieDelete }) {
 
   const savedMovies = React.useContext(SavedMyMoviesContext);
-  const [movies, setMovies] = useState(savedMovies);
+  const [movies, setMovies] = useState([]);
+  const [filterMovies, setFilterMovies] = useState([]);
   const [error, setError] = React.useState('');
   const [movieName, setMovieName] = React.useState('');
   const location = useLocation();
@@ -20,12 +21,19 @@ function SavedMovies({ handleMovieDelete }) {
 
 
   useEffect(() => {
-    if(savedMovies.length === 0) {
+    if (savedMovies.length === 0) {
       setTimeout(() => {
         setMessage('У вас пока нет сохраненных фильмов 🎞')
       }, 900)
     }
   }, [])
+
+  useEffect(() => {
+    if (currentUrl === '/saved-movies') {
+
+      setMovies(savedMovies);
+    }
+  }, [savedMovies])
 
   // сохраняем состояние чекбокса в localStorage
   const onFilterChange = (isChecked) => {
@@ -56,7 +64,7 @@ function SavedMovies({ handleMovieDelete }) {
 
     if (storedSearchResults) {
       setMovieName(storedSearchResults.movieName);
-      setMovies(storedSearchResults.movies);
+      setFilterMovies(storedSearchResults.movies);
       setError(storedSearchResults.filterError)
     }
   }, []);
@@ -71,7 +79,7 @@ function SavedMovies({ handleMovieDelete }) {
         setMovieName('');
         setIsShortMyFilm(false);
         setError('')
-        setMovies(savedMovies)
+        setFilterMovies([])
       }, 300)
     } else {
       setTimeout(() => {
@@ -79,7 +87,7 @@ function SavedMovies({ handleMovieDelete }) {
         localStorage.setItem('isShortMyFilm', JSON.stringify(false));
         setIsShortMyFilm(false);
         setError('')
-        setMovies(savedMovies)
+        setFilterMovies([])
 
       }, 300)
     }
@@ -104,7 +112,7 @@ function SavedMovies({ handleMovieDelete }) {
     if (foundMovies.length === 0) {
       setError('По вашему запросу ничего не найдено');
       filterError = 'По вашему запросу ничего не найдено'
-      setMovies([])
+
     }
 
     let resMovies = filterFoundMovies(foundMovies, isChecked)
@@ -112,11 +120,11 @@ function SavedMovies({ handleMovieDelete }) {
     if (resMovies.length === 0) {
       setError('По вашему запросу ничего не найдено');
       filterError = 'По вашему запросу ничего не найдено'
-      setMovies([])
+
     }
 
-    setMovies(resMovies)
-    console.log({error});
+    setFilterMovies(resMovies)
+    console.log({ error });
     localStorage.setItem('filterMyMovies', JSON.stringify({
       filterError,
       movieName,
@@ -148,7 +156,7 @@ function SavedMovies({ handleMovieDelete }) {
         <p className={`saved__message ${savedMovies.length !== 0 ? '' : 'saved__message_vizible'}`}>{message}</p>
       </div>
       <div className="saved-card__list">
-        <MoviesCardList filteredData={movies} handleMovieDelete={handleMovieDelete} />
+        <MoviesCardList filteredData={filterMovies.length !== 0 || error ? filterMovies : movies} handleMovieDelete={handleMovieDelete} />
       </div>
     </main>
   )
