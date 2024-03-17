@@ -26,7 +26,7 @@ function SavedMovies({ handleMovieDelete }) {
         setMessage('У вас пока нет сохраненных фильмов 🎞')
       }, 900)
     }
-  }, [])
+  }, [savedMovies])
 
   useEffect(() => {
     if (currentUrl === '/saved-movies') {
@@ -44,10 +44,9 @@ function SavedMovies({ handleMovieDelete }) {
   }
 
   function filterByCheckboxStatus(isChecked) {
-    if (savedMovies.length === 0) return;
     setError('')
 
-    filterMoviesByName(savedMovies, movieName, isChecked)
+    filterMoviesByName(movies, movieName, isChecked)
 
   }
 
@@ -81,6 +80,7 @@ function SavedMovies({ handleMovieDelete }) {
         setIsShortMyFilm(false);
         setError('')
         setFilterMovies([])
+        setMovies(savedMovies);
       }, 300)
     } else {
       setTimeout(() => {
@@ -89,6 +89,7 @@ function SavedMovies({ handleMovieDelete }) {
         setIsShortMyFilm(false);
         setError('')
         setFilterMovies([])
+        setMovies(savedMovies);
 
       }, 300)
     }
@@ -99,12 +100,11 @@ function SavedMovies({ handleMovieDelete }) {
 
     setError('')
 
-    filterMoviesByName(savedMovies, movieName)
+    filterMoviesByName(movies, movieName)
   }
 
   function filterMoviesByName(movies, movieName, isChecked = isShortMyFilm) {
 
-    if (savedMovies.length === 0) return;
     let filterError
     console.log(movieName);
     let foundMovies = filterByName(movies, movieName);
@@ -158,7 +158,7 @@ function SavedMovies({ handleMovieDelete }) {
         <p className={`saved__message ${savedMovies.length !== 0 ? '' : 'saved__message_vizible'}`}>{message}</p>
       </div>
       <div className="saved-card__list">
-        <MoviesCardList filteredData={filterMovies.length !== 0 || error ? filterMovies : movies} handleMovieDelete={handleMovieDelete} />
+        <MoviesCardList filteredData={filterMovies.length !== 0 || error !== '' ? filterMovies : movies} handleMovieDelete={handleMovieDelete} />
       </div>
     </main>
   )
