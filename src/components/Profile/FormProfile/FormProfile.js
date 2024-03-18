@@ -1,12 +1,14 @@
 import './FormProfile.css';
 import React from 'react';
+import { AppContext } from '../../../contexts/CurrentUserContext';
 
 function FormProfile(props) {
 
+  const currentUser = React.useContext(AppContext);
 
   return (
     <>
-      <form className='profile__form' noValidate>
+      <form className='profile__form' noValidate onSubmit={props.handleSubmit}>
         <div className='profile__field'>
           <label className='profile__info'>Имя</label>
           <input required
@@ -24,16 +26,16 @@ function FormProfile(props) {
           <input required
             className='profile__input'
             type="text"
-            value={props.email || ''}
+            value={props.email}
             onChange={props.handleEmailChange}
             name="email"
-            pattern="[a-z0-9]+@[a-z]+\.[a-z]{2,}" />
+            pattern="^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" />
           <p className='form__input_error'>{props.emailError}</p>
         </div>
-        <conteiner className='button-submit__conteiner'>
+        <div className='button-submit__container'>
           <p className='button-submit__error'>{props.message}</p>
           <button className={`button-submit effect ${props.formNotValid || props.message ? 'button-submit_disabled' : ''}`} type='submit' disabled={props.formNotValid}>Сохранить</button>
-        </conteiner>
+        </div>
       </form>
       <div className='form__exit effect' onClick={props.formExit}>Отменить редактирования профиля</div>
     </>

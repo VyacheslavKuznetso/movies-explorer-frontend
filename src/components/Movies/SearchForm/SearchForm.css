@@ -47,3 +47,24 @@
   line-height: normal;
 
 }
+
+.movies-form__button-input {
+  opacity: -1;
+  transition: opacity 1s ease;
+  display: none;
+  width: 21px;
+  height: 21px;
+  border: 0;
+  padding: 0;
+  position: absolute;
+  top: 15px;
+  right: 60px;
+  background-image: url(../../../images/d3.svg);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.movies-form__button-input_clear-field {
+  display: flex;
+  opacity: 1;
+}

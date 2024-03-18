@@ -1,4 +1,4 @@
-.movies {
+.saved {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -6,7 +6,7 @@
   font-family: Inter, Arial, sans-serif;
 }
 
-.movies-container {
+.saved-conteiner {
   position: relative;
   width: 89.1%;
   padding-bottom: 10px;
@@ -18,19 +18,19 @@
 }
 
 @media screen and (max-width: 769px) {
-  .movies-container {
+  .saved-conteiner {
     width: 92.19%;
   }
 }
 
 @media screen and (max-width: 321px) {
-  .movies-container {
+  .saved-conteiner {
     width: 91.3%;
   }
 }
 
 
-.movies-container::before {
+.saved-conteiner::before {
   content: '';
   width: 100%;
   height: 1px;
@@ -40,26 +40,24 @@
   background-color: #424242;
 }
 
-.movies-card__list {
+.saved-card__list {
   width: 89.1%;
   padding-top: 80px;
-  display: flex;
-  flex-direction: column;
 }
 
 @media screen and (max-width: 769px) {
-  .movies-card__list {
+  .saved-card__list {
     width: 92.19%;
   }
 }
 
 @media screen and (max-width: 321px) {
-  .movies-card__list {
+  .saved-card__list {
     width: 91.3%;
   }
 }
 
-.isNot-movies {
+.isNot-saved-movies {
   visibility: hidden;
   pointer-events: none;
   color: #4285F4;
@@ -71,9 +69,35 @@
   text-align: center;
   opacity: 0;
   transition: visibility 0.9s, opacity 0.9s ease-in;
+  position: absolute;
+  left: auto;
+  bottom: -100px;
 }
 
-.isNot-movies_error {
+.isNot-saved-movies_error {
+  visibility: visible;
+  pointer-events: all;
+  opacity: 1;
+}
+
+.saved__message {
+  visibility: hidden;
+  pointer-events: none;
+  color: #4285F4;
+  font-size: 30px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin: 0;
+  text-align: center;
+  opacity: 0;
+  transition: visibility 0.1s, opacity 0.1s ease-in;
+  position: absolute;
+  left: auto;
+  bottom: -100px;
+}
+
+.saved__message_vizible {
   visibility: visible;
   pointer-events: all;
   opacity: 1;

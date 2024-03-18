@@ -1,4 +1,4 @@
-.profile__conteiner-info {
+.profile__container-info {
   padding-top: 123px;
   width: 410px;
   display: flex;
@@ -7,20 +7,20 @@
 }
 
 @media screen and (max-width: 769px) {
-  .profile__conteiner-info {
+  .profile__container-info {
     padding-top: 96px;
   }
 }
 
 @media screen and (max-width: 600px) {
-  .profile__conteiner-info {
+  .profile__container-info {
     width: 80.50%;
     padding-top: 80px;
   }
 }
 
 @media screen and (max-width: 400px) {
-  .profile__conteiner-info {
+  .profile__container-info {
     width: 91.50%;
     padding-top: 80px;
   }

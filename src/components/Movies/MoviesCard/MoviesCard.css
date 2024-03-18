@@ -114,12 +114,39 @@
   margin: 0;
 }
 
-
-
-.element__card-save {
+.element__movie {
   position: absolute;
   top: 14px;
   right: 14px;
+}
+
+.element__movie_save {
+  width: 21px;
+  height: 21px;
+  border: 0;
+  padding: 0;
+  background-image: url(../../../images/save3.svg);
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.element__movie_delete {
+  opacity: -1;
+  transition: opacity 1s ease;
+  cursor: pointer;
+  width: 21px;
+  height: 21px;
+  border: 0;
+  padding: 0;
+  background-image: url(../../../images/d3.svg);
+  background-color: transparent;
+}
+
+.element__card:hover .element__movie_delete {
+  opacity: 1;
+}
+
+.element__movie_like {
   opacity: -1;
   transition: opacity 1s ease;
   cursor: pointer;
@@ -134,13 +161,12 @@
   justify-content: center;
   align-items: center;
   color: #FFF;
-  font-family: Inter;
   font-size: 10px;
   font-style: normal;
   font-weight: 400;
   line-height: 9px;
 }
 
-.element__card:hover .element__card-save {
+.element__card:hover .element__movie_like {
   opacity: 1;
 }

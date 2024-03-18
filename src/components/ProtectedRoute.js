@@ -13,3 +13,4 @@ const ProtectedRouteElement = ({ children, ...props }) => {
 }
 
 export default ProtectedRouteElement;
+
